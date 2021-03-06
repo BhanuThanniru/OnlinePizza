@@ -1,0 +1,5 @@
+package com.cg.onlinepizza.entities;
+
+public class Coupon {
+
+}
