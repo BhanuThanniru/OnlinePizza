@@ -7,8 +7,6 @@ import com.cg.onlinepizza.exceptions.InvalidSizeException;
 import com.cg.onlinepizza.exceptions.OrderIdNotFoundException;
 
 public interface IPizzaOrderRepository {
-	
-
 	PizzaOrder bookPizzaOrder(PizzaOrder order);
 
 	PizzaOrder updatePizzaOrder(PizzaOrder order);
