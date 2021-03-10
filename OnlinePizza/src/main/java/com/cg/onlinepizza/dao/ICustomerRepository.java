@@ -15,7 +15,5 @@ public interface ICustomerRepository {
 	List<Customer> viewCustomers();
 
 	Customer viewCustomer(int customerId) throws CustomerIdNotFoundException;
-	
-		
 
 }
