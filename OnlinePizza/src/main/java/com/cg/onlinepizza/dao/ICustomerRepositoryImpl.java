@@ -24,11 +24,10 @@ public class ICustomerRepositoryImpl implements ICustomerRepository {
 
 	@Override
 	public Customer updateCustomer(Customer customer) {
-		int id=customer.getCustomerId();
 		em.getTransaction().begin();
-		em.createQuery("UPDATE Customer set customerAddress = :p , customerName= :q , customerMobile= :r WHERE id= :s" ).setParameter("p", customer.getCustomerAddress()).setParameter("q", customer.getCustomerName()).setParameter("r", customer.getCustomerMobile()).setParameter("s", id);
+		em.find(Customer.class, customer.getCustomerId());
+		em.merge(customer);
 		em.getTransaction().commit();
-		
 		return customer;
 		
 		
@@ -50,16 +49,20 @@ public class ICustomerRepositoryImpl implements ICustomerRepository {
 
 	@Override
 	public List<Customer> viewCustomers() {
-		Query query = em.createQuery("from Product", Customer.class);
-	    List<Customer> resultList = query.getResultList();
+		Query query = em.createQuery("select c from Customer c");
+	    List<Customer> resultList2 = query.getResultList();
 	    
-	    return resultList;
+	    return resultList2;
 	}
 
 	@Override
 	public Customer viewCustomer(int customerId) throws CustomerIdNotFoundException {
-		// TODO Auto-generated method stub
-		return null;
+		em.getTransaction().begin();
+		Customer c1=em.find(Customer.class, customerId);
+		em.getTransaction().commit();
+		
+		return c1;
+		
 	}
 
 }
